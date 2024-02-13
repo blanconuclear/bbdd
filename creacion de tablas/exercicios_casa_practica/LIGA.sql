@@ -56,19 +56,23 @@ CREATE TABLE DIVISION(
 
 ALTER TABLE EQUIPO
 ADD
-CONSTRAINT FK_EQUIPO_cod_divisiono FOREIGN KEY (cod_division)
-                                    REFERENCES DIVISION (codigo)
+CONSTRAINT FK_EQUIPO_cod_divisiono
+FOREIGN KEY (cod_division)
+REFERENCES DIVISION (codigo),
+
+CONSTRAINT FK_EQUIPO_num_campo
+FOREIGN KEY (num_campo)
+REFERENCES CAMPO (numero)
 
 ALTER TABLE PARTIDO
 ADD
-CONSTRAINT FK_PARTIDO_id_equipo_local FOREIGN KEY (id_equipo_local)
-                                    REFERENCES PARTIDO (identificador)
+CONSTRAINT FK_PARTIDO_id_equipo_local 
+FOREIGN KEY (id_equipo_local)
+REFERENCES EQUIPO (identificador),
 
-
-ALTER TABLE PARTIDO
-ADD
-CONSTRAINT FK_PARTIDO_id_equipo_visitante FOREIGN KEY (id_equipo_visitante)
-                                    REFERENCES PARTIDO (identificador)
+CONSTRAINT FK_PARTIDO_id_equipo_visitante 
+FOREIGN KEY (id_equipo_visitante)
+REFERENCES EQUIPO (identificador)
 
 
 
