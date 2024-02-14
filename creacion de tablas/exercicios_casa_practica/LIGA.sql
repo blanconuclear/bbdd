@@ -24,7 +24,6 @@ CREATE TABLE EQUIPO(
     CONSTRAINT UQ_EQUIPO_num_campo UNIQUE (num_campo),
 );
 
-
 CREATE TABLE PARTIDO(
     fecha_hora DATETIME NOT NULL,
     observaciones VARCHAR(150) NULL,
@@ -37,7 +36,7 @@ CREATE TABLE PARTIDO(
 CREATE TABLE CAMPO(
     numero INT NOT NULL,
     nombre VARCHAR(100) NOT NULL,
-    capacidad INT NOT NULL,
+    capacidad INT NOT NULL CONSTRAINT CHK_CAMPO_capacidad CHECK (capacidad >= 500),
 
     CONSTRAINT PK_CAMPO_numero PRIMARY KEY (numero),
     CONSTRAINT UQ_CAMPO_nombre UNIQUE (nombre)
@@ -46,7 +45,7 @@ CREATE TABLE CAMPO(
 CREATE TABLE DIVISION(
     codigo INT NOT NULL,
     nombre VARCHAR(70) NOT NULL,
-    categoria CHAR(4) NULL,
+    categoria CHAR(4) NULL CONSTRAINT DF_DIVISION_categoria DEFAULT ('1DIV'),
 
     CONSTRAINT PK_DIVISION_codigo PRIMARY KEY (codigo),
     CONSTRAINT UQ_DIVISION_nombre UNIQUE (nombre)

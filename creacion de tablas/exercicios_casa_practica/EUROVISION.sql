@@ -12,8 +12,8 @@ GO
 -- Crea la tabla INTERPRETE
 CREATE TABLE INTERPRETE(
     numero int NOT NULL,
-    nombre VARCHAR(30) NOT NULL,
-    fecha DATE NULL,
+    nombre VARCHAR(40) NOT NULL,
+    fecha_nac DATE NULL constraint CHK_INTERPRETE_fecha_nac CHECK (DATEDIFF(year,getdate(),fecha_nac) >= 16),
     num_cancion INT NOT NULL,
 
     CONSTRAINT PK_INTERPRETE_numero PRIMARY KEY (numero),
@@ -37,13 +37,15 @@ CREATE TABLE CANCION(
 CREATE TABLE PAIS(
     identificador INT NOT NULL,
     denominacion VARCHAR(70) NOT NULL
+
+	CONSTRAINT PK_PAIS_identificador PRIMARY KEY (identificador)
 );
 
 -- Crea la tabla VOTACION
 CREATE TABLE VOTACION(
     id_vota_a INT NOT NULL,
     id_es_votado_por INT NOT NULL,
-    puntos INT NOT NULL,
+    puntos INT NOT NULL CONSTRAINT DF_VOTACION_puntos DEFAULT (0),
     CONSTRAINT PK_VOTACION PRIMARY KEY (id_vota_a,id_es_votado_por),
     
 );
